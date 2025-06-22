@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:serendipity/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:serendipity/features/auth/domain/repositories/auth_repository.dart';
 
 import '../../../core/mocks/mock_classes.dart';
 
@@ -27,5 +28,36 @@ void main(){
       //assert
       expect(result, mockData);
     });
+
+    test('Should throw error from datasource', ()async{
+      //Arrange
+      when(() => mockAuthRemoteDatasource.login(any(), any())).thenThrow((_)async=> Exception('Login Failed'));
+
+      //Act
+      final data = authRepositoryImpl.login('jkdksjds', 'jkdskj');
+
+      //Assert
+      expect(()=> data, throwsA(isA<Exception>()));
+    });
+
+    test('Should return data coorectly if Regsiter API success', ()async{
+    final mockData = {'success': true};
+    when(() => mockAuthRemoteDatasource.register(any(), any())).thenAnswer((_)async=> mockData);
+    final data = await authRepositoryImpl.register('test', 'test');
+
+    expect(data, mockData);
   });
+
+  test('Should throw exception if Register API call fails', (){
+    when(() => mockAuthRemoteDatasource.register(any(), any())).thenThrow(Exception('Registration Failed'));
+
+    final data = authRepositoryImpl.register('test', 'test');
+
+    expect(data, throwsA(isA<Exception>()));
+
+  });
+  });
+
+
+  
 }

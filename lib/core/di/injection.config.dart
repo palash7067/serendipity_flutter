@@ -29,6 +29,8 @@ import 'package:serendipity/features/auth/domain/usecases/login_usecase.dart'
     as _i299;
 import 'package:serendipity/features/auth/domain/usecases/questionnaire_answer_usecase.dart'
     as _i1047;
+import 'package:serendipity/features/auth/domain/usecases/register_usecase.dart'
+    as _i998;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -54,6 +56,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1047.QuestionnaireAnswerUsecase>(
       () => _i1047.QuestionnaireAnswerUsecase(gh<_i48.AuthRepository>()),
+    );
+    gh.factory<_i998.RegisterUsecase>(
+      () => _i998.RegisterUsecase(gh<_i48.AuthRepository>()),
     );
     return this;
   }

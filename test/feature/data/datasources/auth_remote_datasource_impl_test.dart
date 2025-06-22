@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:serendipity/core/utils/constants.dart';
@@ -40,6 +41,26 @@ void main(){
 
       //Assert
       expect(() => result, throwsA(isA<Exception>()));
+    });
+
+    test('Should return success response from Register API', ()async{
+      //Arrange
+      final mockData = {'success': true};
+      when(() => mockDioClient.post(any(), data: any(named: 'data'))).thenAnswer((_)async=> mockData);
+
+      //act
+      final data = await authRemoteDatasource.register('dfdsjds', 'dsjkddskdksj');
+
+      //Assert
+      expect(data, mockData);
+
+    });
+
+    test('Should throw exception if API call fails', (){
+      when(() => mockDioClient.post(any(), data: any(named: 'data'))).thenThrow(Exception('Register Failed'));
+
+      final data = authRemoteDatasource.register('test', 'test');
+      expect(()=>data, throwsA(isA<Exception>()));
     });
   });
 }

@@ -18,6 +18,7 @@ import 'package:serendipity/features/auth/data/models/response_models/questionna
 
 abstract class AuthRepository {
   Future<Map<String, dynamic>> login(String email, String password);
+  Future<Map<String, dynamic>> register(String email, String password);
   Future<QuestionnaireResponseModel> getQuestionnaire();
   Future<Map<String, dynamic>> questionnaireAnswer(int questionId, int optionId);
 

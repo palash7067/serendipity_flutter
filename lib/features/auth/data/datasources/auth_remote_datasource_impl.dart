@@ -23,7 +23,7 @@ class AuthRemoteDatasourceImpl extends AuthRemoteDatasource{
     return data;
     }catch(e){
       debugPrint(e.toString());
-      rethrow;
+      throw Exception(e.toString());
     }
   }
   
@@ -36,7 +36,7 @@ class AuthRemoteDatasourceImpl extends AuthRemoteDatasource{
     return QuestionnaireResponseModel.fromJson(data); 
     }catch(e){
       debugPrint(e.toString());
-      rethrow;
+      throw Exception(e.toString());
     }
   }
 
@@ -52,5 +52,22 @@ class AuthRemoteDatasourceImpl extends AuthRemoteDatasource{
       rethrow;
     }
    
+  }
+  
+  @override
+  Future<Map<String, dynamic>> register(String email, String password)async {
+   try{
+    final data = await dioClient.post(
+      ApiEndpoints.register,
+      data: {
+        'email' : email,
+        'password' : password
+      }
+    );
+    return data;
+   }catch(e){
+    debugPrint(e.toString());
+    throw Exception(e.toString());
+   }
   }
 }

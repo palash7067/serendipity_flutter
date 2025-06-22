@@ -51,6 +51,15 @@ class AuthRepositoryImpl extends AuthRepository{
       throw Exception(e.toString());
     }
   }
-
   
+  @override
+  Future<Map<String, dynamic>> register(String email, String password) async{
+   try{
+    final data = await authRemoteDatasource.register(email, password);
+    return data;
+   }catch(e){
+    debugPrint(e.toString());
+    throw Exception(e.toString());
+  }
+  }  
 }
