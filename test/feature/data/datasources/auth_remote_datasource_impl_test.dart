@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:serendipity/core/utils/constants.dart';
 import 'package:serendipity/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:serendipity/features/auth/data/datasources/auth_remote_datasource_impl.dart';
+import 'package:serendipity/features/auth/data/models/response_models/gender_response_model/gender_response_model.dart';
 
 import '../../../core/mocks/mock_classes.dart';
 
@@ -62,5 +63,37 @@ void main(){
       final data = authRemoteDatasource.register('test', 'test');
       expect(()=>data, throwsA(isA<Exception>()));
     });
+
+
+    test("Should Return data properly if Genders API Success", ()async{
+
+      //Arrange
+      Map<String, dynamic> mockData = {
+        'data': [{
+          'id': 1,
+          'name': 'Male'
+        }]
+      };
+
+      final mockModel = GenderResponseModel.fromJson(mockData);
+
+      when(() => mockDioClient.get(any())).thenAnswer((_) async=> mockData);
+
+      final data = await authRemoteDatasource.getGenders();
+
+      expect(data.genders?.first.id, mockModel.genders?.first.id);
+
+    });
+
+
+    test('Should throw an error if API calls fails', (){
+      when(() => mockDioClient.get(any())).thenThrow(Exception("Network Error"));
+
+      final data = authRemoteDatasource.getGenders();
+
+      expect(data, throwsA(isA<Exception>()));
+    });
   });
+
+
 }

@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'custom_interceptor.dart';
 import 'dio_client.dart';
 
+
 // With @Injectable alone, injectable will use lazy singleton registration by default
 @Injectable(as: DioClient)
 class DioHttpClient implements DioClient {

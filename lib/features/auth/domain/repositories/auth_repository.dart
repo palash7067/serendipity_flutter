@@ -14,6 +14,7 @@
 // Testability: Abstractions enable easy mocking, supporting isolated and fast tests.
 // Extensibility: New features can be added by implementing interfaces without changing existing code.
 
+import 'package:serendipity/features/auth/data/models/response_models/gender_response_model/gender_response_model.dart';
 import 'package:serendipity/features/auth/data/models/response_models/questionnaire_response_model/questionnaire_response_model.dart';
 
 abstract class AuthRepository {
@@ -21,5 +22,5 @@ abstract class AuthRepository {
   Future<Map<String, dynamic>> register(String email, String password);
   Future<QuestionnaireResponseModel> getQuestionnaire();
   Future<Map<String, dynamic>> questionnaireAnswer(int questionId, int optionId);
-
+  Future<GenderResponseModel> getGenders();
 }

@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:serendipity/core/network/dio_client.dart';
 import 'package:serendipity/core/utils/constants.dart';
 import 'package:serendipity/features/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:serendipity/features/auth/data/models/response_models/gender_response_model/gender_response_model.dart';
 import 'package:serendipity/features/auth/data/models/response_models/questionnaire_response_model/questionnaire_response_model.dart';
 
 @Injectable(as: AuthRemoteDatasource)
@@ -69,5 +70,15 @@ class AuthRemoteDatasourceImpl extends AuthRemoteDatasource{
     debugPrint(e.toString());
     throw Exception(e.toString());
    }
+  }
+
+  @override
+  Future<GenderResponseModel> getGenders() async{
+    try{
+      final data = await dioClient.get(ApiEndpoints.getGenders);
+      return GenderResponseModel.fromJson(data);
+    }catch (e){
+      throw Exception(e.toString());
+    }
   }
 }

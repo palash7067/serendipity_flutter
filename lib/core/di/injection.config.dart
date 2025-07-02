@@ -23,6 +23,8 @@ import 'package:serendipity/features/auth/data/repositories/auth_repository_impl
     as _i982;
 import 'package:serendipity/features/auth/domain/repositories/auth_repository.dart'
     as _i48;
+import 'package:serendipity/features/auth/domain/usecases/get_gender_usecase.dart'
+    as _i1037;
 import 'package:serendipity/features/auth/domain/usecases/get_questionnaire_usecase.dart'
     as _i408;
 import 'package:serendipity/features/auth/domain/usecases/login_usecase.dart'
@@ -59,6 +61,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i998.RegisterUsecase>(
       () => _i998.RegisterUsecase(gh<_i48.AuthRepository>()),
+    );
+    gh.factory<_i1037.GetGenderUsecase>(
+      () => _i1037.GetGenderUsecase(gh<_i48.AuthRepository>()),
     );
     return this;
   }
