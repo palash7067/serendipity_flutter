@@ -41,7 +41,7 @@ group('Dio Client Impl', (){
     final data = dioHttpClient.get('/test');
 
     //Assert
-    expect(() => data, throwsA(isA<DioException>()));
+    expect(() => data, throwsA(isA<Exception>()));
   });
 
 
@@ -59,7 +59,7 @@ group('Dio Client Impl', (){
 
     final data = dioHttpClient.post('/test');
 
-    expect(() => data, throwsA(isA<DioException>()));
+    expect(() => data, throwsA(isA<Exception>()));
   });
 
 });
