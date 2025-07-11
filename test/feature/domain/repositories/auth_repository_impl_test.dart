@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:serendipity/features/auth/data/models/response_models/gender_response_model/gender_response_model.dart';
 import 'package:serendipity/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:serendipity/features/auth/domain/repositories/auth_repository.dart';
 
@@ -56,8 +57,34 @@ void main(){
     expect(data, throwsA(isA<Exception>()));
 
   });
+
+
+  test('Should return GenderResponseModel if API success', ()async{
+    Map<String, dynamic> mockData = {
+        'data': [{
+          'id': 1,
+          'name': 'Male'
+        }]
+      };
+
+      final mockModel = GenderResponseModel.fromJson(mockData);
+
+
+      when(() => mockAuthRemoteDatasource.getGenders()).thenAnswer((_)async=>mockModel);
+
+      final data = await authRepositoryImpl.getGenders();
+
+      expect(data.genders?.first.id, mockModel.genders?.first.id);
   });
 
+  test("Should throw an error if API fails", (){
+    when(() => mockAuthRemoteDatasource.getGenders()).thenThrow(Exception("Error Fetching Data"));
+
+    final data = authRepositoryImpl.getGenders();
+
+    expect(data, throwsA(isA<Exception>()));
+  });
+  });
 
   
 }

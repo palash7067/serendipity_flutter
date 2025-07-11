@@ -2,6 +2,7 @@
 // It’s separated from the repository to follow the Single Responsibility Principle (SRP),
 // allowing us to handle API calls without mixing business logic.
 
+import 'package:serendipity/features/auth/data/models/response_models/gender_response_model/gender_response_model.dart';
 import 'package:serendipity/features/auth/data/models/response_models/questionnaire_response_model/questionnaire_response_model.dart';
 
 abstract class AuthRemoteDatasource{
@@ -12,4 +13,6 @@ abstract class AuthRemoteDatasource{
   Future<QuestionnaireResponseModel> getQuestionnaire();
 
   Future<Map<String, dynamic>> questionnaireAnswer(int questionId, int optionId);
+
+  Future<GenderResponseModel> getGenders();
 }

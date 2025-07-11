@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:serendipity/features/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:serendipity/features/auth/data/models/response_models/gender_response_model/gender_response_model.dart';
 import 'package:serendipity/features/auth/data/models/response_models/questionnaire_response_model/questionnaire_response_model.dart';
 import 'package:serendipity/features/auth/domain/repositories/auth_repository.dart';
 
@@ -61,5 +62,15 @@ class AuthRepositoryImpl extends AuthRepository{
     debugPrint(e.toString());
     throw Exception(e.toString());
   }
+  }
+
+  @override
+  Future<GenderResponseModel> getGenders() async{
+    try{
+      final data = await authRemoteDatasource.getGenders();
+      return data;
+    }catch(e){
+      throw Exception(e.toString());
+    }
   }  
 }

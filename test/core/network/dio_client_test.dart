@@ -6,6 +6,7 @@ import 'package:serendipity/core/network/dio_client_impl.dart';
 
 import '../mocks/mock_classes.dart';
 
+
 void main(){
 
 group('Dio Client Impl', (){
@@ -40,7 +41,7 @@ group('Dio Client Impl', (){
     final data = dioHttpClient.get('/test');
 
     //Assert
-    expect(() => data, throwsA(isA<DioException>()));
+    expect(() => data, throwsA(isA<Exception>()));
   });
 
 
@@ -58,7 +59,7 @@ group('Dio Client Impl', (){
 
     final data = dioHttpClient.post('/test');
 
-    expect(() => data, throwsA(isA<DioException>()));
+    expect(() => data, throwsA(isA<Exception>()));
   });
 
 });

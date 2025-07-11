@@ -3,4 +3,5 @@ class ApiEndpoints {
   static const register = '/api/v1/register/';
   static const getQuestionnaire = '/api/v1/questionnaire/';
   static const questionnaireAnswer = '/api/v1/questionnaire-answer/';
+  static const getGenders = '/api/v1/genders/';
 }
